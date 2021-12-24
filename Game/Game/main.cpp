@@ -5,6 +5,8 @@
 #include "baseClasses.h"
 #include "evil.h"
 #include "gameClasses.h"
+#include <fstream> 
+#include <string> 
 
 using namespace std;
 
@@ -12,10 +14,17 @@ int main() {
 	setlocale(LC_ALL, "Rus");
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-
+	string patch = "Save.txt";
 	Soldier soldier;
 	KriegWarrior kriegwarrior;
 	Player firstPlayer;
+	fstream saven;
+	saven.open(patch);
+	saven << soldier.getHealth();
+	saven << soldier.getDamage();
+	saven.close();
+	cout << soldier.getHealth();
+	cout << soldier.getDamage();
 	cout << "А вот и подкрепление\n Сейчас вас определят в дивизии" << endl;
 	cout << "Кто ты?" << endl;
 	cout << "1 - Солдат\n2 - Воин Крига" << endl;
@@ -99,6 +108,12 @@ int main() {
 							{
 								cout << "Вы не сдохли" << endl;
 								cout << "Времени на отдых нет, нужно идти дальше, правда стоит забинтовать раны\n1 - Да\n2 - Нет";
+								cout << "сохранение" << endl;
+								ofstream abc;
+								abc.open(patch);
+								abc << soldier.getHealth();
+								abc << soldier.getDamage();
+								abc.close();
 								int relax;
 								cin >> relax;
 								if (relax == 1) {
